@@ -1,6 +1,6 @@
 package com.shopping.entities;
 
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class Customer {
 	private String email;
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Address> addresslist;
+	private List<Address> addresslist= new ArrayList<>();
 	
 	
 	public int getCustomerId() {

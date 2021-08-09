@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
@@ -18,7 +19,8 @@ public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartId;
-	private String userId;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Customer customer;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> products;
 	
@@ -28,11 +30,12 @@ public class Cart {
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
 	}
-	public String getUserId() {
-		return userId;
+	
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	public List<Product> getProducts() {
 		return products;
@@ -40,10 +43,10 @@ public class Cart {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	public Cart(int cartId, String userId, List<Product> products) {
+	public Cart(int cartId, Customer customer, List<Product> products) {
 		super();
 		this.cartId = cartId;
-		this.userId = userId;
+		this.customer = customer;
 		this.products = products;
 	}
 	public Cart() {
@@ -51,7 +54,7 @@ public class Cart {
 	}
 	@Override
 	public String toString() {
-		return "Cart [cartId=" + cartId + ", userId=" + userId + ", products=" + products + "]";
+		return "Cart [cartId=" + cartId + ", products=" + products + "]";
 	}
 	
 	
