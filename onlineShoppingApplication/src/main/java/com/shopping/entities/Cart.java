@@ -20,8 +20,11 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartId;
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name ="customerId")
 	private Customer customer;
+	
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "CartProductDetails", joinColumns = @JoinColumn(name = "cartId"), inverseJoinColumns = @JoinColumn(name = "productId"))
 	private List<Product> products;
 	
 	public int getCartId() {

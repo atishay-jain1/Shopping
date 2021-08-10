@@ -9,7 +9,6 @@ import com.shopping.entities.Product;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
-	public Cart findByProduct(Product p);
 	
 	
 }
