@@ -35,8 +35,13 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public void removeAddress(Address add) {
-		addressRepository.delete(add);
+	public Address removeAddress(int addressId) {
+		Optional<Address> existingAddress = addressRepository.findById(addressId);
+		if (!existingAddress.isPresent()) {
+			throw new RecordNotFoundException("Address with Id: " + addressId + " not found. Try saving a new product");
+		}
+		addressRepository.deleteById(addressId);
+		return existingAddress.get();
 	}
 
 	@Override
