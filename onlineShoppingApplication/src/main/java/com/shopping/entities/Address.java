@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 public class Address implements Serializable{
@@ -15,14 +18,22 @@ public class Address implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int addressId;
 	
-	
+	@NotNull
 	private String streetNo;
-	private String buildingName;
-	private String  city;
-	private String state;
-	private String country;	
-	private String pincode;
 	
+	private String buildingName;
+	@NotNull
+	private String  city;
+	@NotNull
+	private String state;
+	@NotNull
+	private String country;	
+	@NotNull
+	private String pincode;
+
+	@ManyToOne
+	@JoinColumn(name="customerId")
+	private Customer customer;
 	
 	public int getAddressId() {
 		return addressId;
@@ -66,8 +77,16 @@ public class Address implements Serializable{
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
+	
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public Address(int addressId, String streetNo, String buildingName, String city, String state, String country,
-			String pincode) {
+			String pincode, Customer customer) {
 		super();
 		this.addressId = addressId;
 		this.streetNo = streetNo;
@@ -76,6 +95,7 @@ public class Address implements Serializable{
 		this.state = state;
 		this.country = country;
 		this.pincode = pincode;
+		this.customer =customer;
 	}
 	public Address() {
 		

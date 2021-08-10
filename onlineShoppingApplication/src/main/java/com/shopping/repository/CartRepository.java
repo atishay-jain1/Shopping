@@ -9,7 +9,10 @@ import com.shopping.entities.Product;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 948e2486ce92b2fe9f12eb343fa8783c67f936c9
 	
 	
 }
