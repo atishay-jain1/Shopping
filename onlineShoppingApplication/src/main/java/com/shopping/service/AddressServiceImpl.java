@@ -1,17 +1,19 @@
 package com.shopping.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.shopping.entities.Address;
+import com.shopping.entities.Order;
+import com.shopping.exception.RecordNotFoundException;
 import com.shopping.repository.AddressRepository;
 
 @Service("addressService")
 public class AddressServiceImpl implements AddressService{
-	@Qualifier("addressRepository")
 	@Autowired
 	private AddressRepository addressRepository;
 	
@@ -19,13 +21,16 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public Address addAddress(Address add) {
-		Address a1 = addressRepository.save(add);
-		return a1;
+		return addressRepository.save(add);
 	}
 
 	@Override
-	public Address updateAddress(Address add) {
-		// TODO Auto-generated method stub
+	public Address updateAddress(int addressId, Address add) {
+		Optional<Address> existingAddress = addressRepository.findById(addressId);
+		if (!existingAddress.isPresent()) {
+			throw new RecordNotFoundException("Address with Id: " + addressId + " not found. Try saving a new product");
+		}
+		add.setAddressId(addressId);
 		return addressRepository.save(add);
 	}
 
@@ -41,8 +46,11 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public Address viewAddress(Address add) {
-		// TODO Auto-generated method stub
-		return add;
+	public Address viewAddress(int addressId) throws RecordNotFoundException {
+		Optional<Address> address = addressRepository.findById(addressId);
+		if (!address.isPresent()) {
+			throw new RecordNotFoundException("Address with Id: " + addressId + " not found");
+		}
+		return address.get();
 	}
 }
