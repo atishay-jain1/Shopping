@@ -1,7 +1,7 @@
 
 package com.shopping.entities;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Map;
 
 import javax.persistence.CascadeType;
