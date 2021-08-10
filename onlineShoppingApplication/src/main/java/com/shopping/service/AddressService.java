@@ -7,8 +7,8 @@ import com.shopping.entities.Address;
 public interface AddressService {
 	
 	public Address addAddress(Address add);
-	public Address updateAddress(Address add);
+	public Address updateAddress(int addressId, Address add);
 	public void removeAddress(Address add);
 	public List<Address> viewAllAddress();
-	public Address viewAddress(Address add);
+	public Address viewAddress(int addressId);
 }
