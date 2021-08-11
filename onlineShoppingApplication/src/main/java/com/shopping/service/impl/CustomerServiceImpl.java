@@ -3,11 +3,13 @@ package com.shopping.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.shopping.entities.Customer;
 import com.shopping.exception.RecordNotFoundException;
 import com.shopping.repository.CustomerRepository;
 import com.shopping.service.CustomerService;
-
+@Service
 public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	CustomerRepository customerRepository;  

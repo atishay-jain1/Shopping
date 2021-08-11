@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.shopping.entities.Address;
 import com.shopping.entities.Order;
-import com.shopping.entities.User;
 import com.shopping.exception.RecordNotFoundException;
 import com.shopping.repository.OrderRepository;
 import com.shopping.repository.UserRepository;
 import com.shopping.service.OrderService;
-
+@Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
@@ -69,11 +69,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> viewAllOrderByUserId(int userId) {
-		Optional<User> user = userRepo.findById(userId);
-		if (!user.isPresent()) {
-			throw new RecordNotFoundException("No records with this user Id  found");
-		}
-		return orderRepo.findByUser(user.get());
+		return orderRepo.findByUser(userId);
 	}
 
 }
