@@ -38,7 +38,7 @@ public class Product {
 	@NotNull
 	private int quantity;
 
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "categoryId")
 	private Category category;
 

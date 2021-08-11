@@ -43,8 +43,8 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public List<Address> viewAllAddress() {
-		List<Address> l1 = addressRepository.findAll();
-		return l1;
+		
+		return addressRepository.findAll();
 	}
 
 	@Override

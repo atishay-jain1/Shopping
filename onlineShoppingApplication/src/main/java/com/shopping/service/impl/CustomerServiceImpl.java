@@ -21,7 +21,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateCustomer(Customer cust) {
-		// TODO Auto-generated method stub
 		Optional<Customer> existingCustomer = customerRepository.findById(cust.getCustomerId());
 		if (!existingCustomer.isPresent()) {
 			throw new RecordNotFoundException("Customer with Id: " + cust.getCustomerId() + " not found. Try registering a new customer");

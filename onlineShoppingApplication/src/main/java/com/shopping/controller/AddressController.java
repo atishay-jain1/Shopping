@@ -32,8 +32,8 @@ public class AddressController {
 	}
 
 	@GetMapping("/addresses/{addressId}")
-	public ResponseEntity<Address> viewAddress(@PathVariable("addressId") int AddressId) {
-		return ResponseEntity.ok(addressService.viewAddress(AddressId));
+	public ResponseEntity<Address> viewAddress(@PathVariable("addressId") int addressId) {
+		return ResponseEntity.ok(addressService.viewAddress(addressId));
 	}
 
 	@PutMapping("/addresses/{addressId}")

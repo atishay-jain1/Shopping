@@ -21,6 +21,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	private static String getErrorMessage(int productId) {
+		return "Product with id : " + productId + " not found";
+	}
 
 	@Override
 	public Product addProduct(Product product) {
@@ -36,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product viewProduct(int productId) throws RecordNotFoundException {
 		Optional<Product> product = productRepository.findById(productId);
 		if (!product.isPresent()) {
-			throw new RecordNotFoundException("Product with Id: " + productId + " not found");
+			throw new RecordNotFoundException(getErrorMessage(productId));
 		}
 		return product.get();
 	}
@@ -55,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product updateProduct(int productId, Product product) {
 		Optional<Product> existingProduct = productRepository.findById(productId);
 		if (!existingProduct.isPresent()) {
-			throw new RecordNotFoundException("Product with Id: " + productId + " not found. Try saving a new product");
+			throw new RecordNotFoundException(getErrorMessage(productId));
 		}
 		product.setProductId(productId);
 		return productRepository.save(product);
@@ -66,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product deleteProduct(int productId) {
 		Optional<Product> existingProduct = productRepository.findById(productId);
 		if (!existingProduct.isPresent()) {
-			throw new RecordNotFoundException("Product with Id: " + productId + " not found. Try saving a new product");
+			throw new RecordNotFoundException(getErrorMessage(productId));
 		}
 		productRepository.deleteById(productId);
 		return existingProduct.get();

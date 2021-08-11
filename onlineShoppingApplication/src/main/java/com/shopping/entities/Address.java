@@ -1,6 +1,6 @@
 package com.shopping.entities;
 
-import java.io.Serializable;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +12,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-public class Address implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int addressId;
@@ -85,25 +84,8 @@ public class Address implements Serializable{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Address(int addressId, String streetNo, String buildingName, String city, String state, String country,
-			String pincode, Customer customer) {
-		super();
-		this.addressId = addressId;
-		this.streetNo = streetNo;
-		this.buildingName = buildingName;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.pincode = pincode;
-		this.customer =customer;
-	}
 	public Address() {
-		
-	}
-	@Override
-	public String toString() {
-		return "Address [addressId=" + addressId + ", streetNo=" + streetNo + ", buildingName=" + buildingName
-				+ ", city=" + city + ", state=" + state + ", country=" + country + ", pincode=" + pincode + "]";
+		super();
 	}
 	
 

@@ -22,7 +22,7 @@ public class LoginController {
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody User user, BindingResult result) {
 		if (result.hasErrors()) {
-			throw new BadRequestException("Partial Or Incorrect data sent");
+			throw new BadRequestException();
 		}
 		User addUser = loginService.addUser(user);
 		return ResponseEntity.ok("User successfully registered with id : " + addUser.getUserId());
@@ -37,7 +37,7 @@ public class LoginController {
 	@PutMapping("/login")
 	public ResponseEntity<String> validateUser(@RequestBody User user, BindingResult result) {
 		if (result.hasErrors())
-			throw new BadRequestException("Partial Or Incorrect data sent");
+			throw new BadRequestException();
 		loginService.validateUser(user);
 		return ResponseEntity.ok("User succesfully logged In");
 	}
@@ -45,7 +45,7 @@ public class LoginController {
 	@PutMapping("/logout")
 	public ResponseEntity<String> logOut(@RequestBody User user, BindingResult result) {
 		if (result.hasErrors())
-			throw new BadRequestException("Partial Or Incorrect data sent");
+			throw new BadRequestException();
 		loginService.logOut(user);
 		return ResponseEntity.ok("User succesfully logged Out");
 	}
