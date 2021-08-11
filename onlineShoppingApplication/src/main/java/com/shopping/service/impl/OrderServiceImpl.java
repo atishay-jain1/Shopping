@@ -1,21 +1,27 @@
-package com.shopping.service;
+package com.shopping.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.shopping.entities.Address;
 import com.shopping.entities.Order;
-import com.shopping.entities.Product;
+import com.shopping.entities.User;
 import com.shopping.exception.RecordNotFoundException;
 import com.shopping.repository.OrderRepository;
-import com.shopping.entities.*;
+import com.shopping.repository.UserRepository;
+import com.shopping.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderRepository orderRepo;
-	
+
+	@Autowired
+	UserRepository userRepo;
+
 	@Override
 	public Order addOrder(Order order) {
 		return orderRepo.save(order);
@@ -52,9 +58,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> viewAllOrder(){
-		List<Order> l1 = orderRepo.findAll();
-		return l1;
+	public List<Order> viewAllOrder(LocalDate date) {
+		return orderRepo.findByOrderDate(date);
 	}
-	
+
+	@Override
+	public List<Order> viewAllOrderByLocation(Address adddress) {
+		return orderRepo.findByAddress(adddress);
+	}
+
+	@Override
+	public List<Order> viewAllOrderByUserId(int userId) {
+		Optional<User> user = userRepo.findById(userId);
+		if (!user.isPresent()) {
+			throw new RecordNotFoundException("No records with this user Id  found");
+		}
+		return orderRepo.findByUser(user.get());
+	}
+
 }

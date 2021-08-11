@@ -1,4 +1,4 @@
-package com.shopping.service;
+package com.shopping.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +11,7 @@ import com.shopping.entities.Product;
 import com.shopping.exception.RecordNotFoundException;
 import com.shopping.repository.CategoryRepository;
 import com.shopping.repository.ProductRepository;
+import com.shopping.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {

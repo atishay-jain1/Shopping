@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shopping.entities.Address;
-
 import com.shopping.service.AddressService;
-
 
 @RestController
 public class AddressController {
 	@Autowired
 	AddressService addressService;
 
-	@PostMapping("/address")
+	@PostMapping("/addresses")
 	public ResponseEntity<Address> addAddress(@RequestBody Address address) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(addressService.addAddress(address));
 	}
@@ -37,8 +35,6 @@ public class AddressController {
 	public ResponseEntity<Address> viewAddress(@PathVariable("addressId") int AddressId) {
 		return ResponseEntity.ok(addressService.viewAddress(AddressId));
 	}
-
-	
 
 	@PutMapping("/addresses/{addressId}")
 	public ResponseEntity<Address> updateAddress(@RequestBody Address address,
